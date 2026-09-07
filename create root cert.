@@ -1,0 +1,44 @@
+From vManager go into vshell
+
+
+On the vmanager console after initial configuration go in to shell mode. 
+# vshell
+
+Below creates a root ca for from the vmanager and is the issuer.
+% openssl genrsa -out SDWAN.key 2048
+
+openssl req -x509 -new -nodes -key SDWAN.key -sha256 -days 2000 -subj "/C=UK/ST=London/L=NorthWest/O=cybertechnet/CN=cybertechnet" -out SDWAN.pem
+
+% cat SDWAN.key <-- this will show the base64 certificate
+% cat SDWAN.pem <-- this will show the csr certificate
+
+% openssl req -x509 -new -nodes -key SDWAN.key -sha256 -days 2000 -subj "/C=US/ST=Virginia/L=Radiant/O=labfun/CN=labfun" -out SDWAN.pem
+
+% cat sdwan.pem 
+% copy the start and end of that file
+
+
+ % openssl x509 -req -in vbond.csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
+
+Then go onto vmanager web GUI and install the certificate.
+
+
+On each of the devices once the root-ca is applied create a csr for each as below.  This can be done on the cli of each device by:
+
+# vshell
+
+% openssl x509 -req -in  vmanage_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
+
+% openssl x509 -req -in  vbond_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
+
+% openssl x509 -req -in  vsmart_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
+
+
+
+
+
+openssl x509 -req -in  vmanage_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
+
+openssl x509 -req -in  vbond_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
+
+openssl x509 -req -in  vsmart_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
