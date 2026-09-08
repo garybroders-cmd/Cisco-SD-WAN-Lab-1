@@ -18,6 +18,19 @@ openssl req -x509 -new -nodes -key SDWAN.key -sha256 -days 2000 -subj "/C=UK/ST=
 % copy the start and end of that file
 
 
+Note:----
+ If you want to stop vManage from contacting Cisco’s cloud CA (Cisco SUDI / Cisco PKI)
+CML, lab builds, and non‑production SD‑WAN deployments often do not use Cisco’s cloud CA.
+To disable Cisco CA integration:
+✔️ Disable Cisco PKI / Cisco Cloud CA in vManage
+In vManage → Administration → Settings → Controller Certificate Authorization:
+• Set Controller Certificate Authorization to Manual
+• Disable Cisco Automated Certificate Signing
+• Remove any Cisco Smart Account / Virtual Account entries
+• Remove Cisco CA URL if present
+----
+
+
  % openssl x509 -req -in vbond.csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
 
 Then go onto vmanager web GUI and install the certificate.
