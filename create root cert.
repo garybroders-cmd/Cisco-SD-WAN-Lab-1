@@ -68,6 +68,18 @@ show sdwan control connections
 show sdwan omp peers
 
 
+show sdwan control connections
+show sdwan omp summary
+show sdwan system status
+show sdwan tloc
+
+
+
+
+
+
+
+
 
 
 openssl x509 -req -in  vbond_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
