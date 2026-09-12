@@ -52,6 +52,24 @@ On each of the devices once the root-ca is applied create a csr for each as belo
 
 openssl x509 -req -in  vmanage_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
 
+
+
+
+
+Configure vedge router with routing details to see vmanager
+
+copy scp: bootflash:
+
+destination file name = ciscosdwan_cloud_init.cfg
+
+
+show sdwan control connections
+
+show sdwan omp peers
+
+
+
+
 openssl x509 -req -in  vbond_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
 
 openssl x509 -req -in  vsmart_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
