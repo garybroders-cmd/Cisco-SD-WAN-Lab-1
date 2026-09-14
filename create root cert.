@@ -30,11 +30,13 @@ In vManage → Administration → Settings → Controller Certificate Authorizat
 
  % openssl x509 -req -in vbond.csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
 
-Then go onto vmanager web GUI and install the certificate.
+Then go to the vManager web GUI and install the certificate.
 
 
-On each of the devices once the root-ca is applied (SDWAN.pem), create a csr for each as below via vManger GUI.  
-This can be done on the cli of each device by:
+On each device, once the root-ca is applied (SDWAN.pem), create a CSR for each as below via the vManager GUI.  
+This can be done on the CLI of each device by:
+
+This will only apply to Controller, Validator and Manager.
 
 # vshell
 
@@ -58,7 +60,6 @@ Commands to check the sdwan connectivity and tunnel
 
 show sdwan control connections
 show sdwan omp peers
-show sdwan control connections
 show sdwan omp summary
 show sdwan system status
 show sdwan tloc
