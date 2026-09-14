@@ -1,18 +1,15 @@
-From vManager go into vshell
+From vManager, go into vShell:
 
-
-On the vmanager console after initial configuration go in to shell mode. 
+On the vManager console, after initial configuration, go into shell mode. 
 # vshell
 
-Below creates a root ca for from the vmanager and is the issuer.
+The following creates a root CA from the vManager and is the issuer.
 % openssl genrsa -out SDWAN.key 2048
 
 openssl req -x509 -new -nodes -key SDWAN.key -sha256 -days 2000 -subj "/C=UK/ST=London/L=NorthWest/O=thebiglab/CN=thebiglab" -out SDWAN.pem
 
 % cat SDWAN.key <-- this will show the base64 certificate
 % cat SDWAN.pem <-- this will show the csr certificate
-
-% openssl req -x509 -new -nodes -key SDWAN.key -sha256 -days 2000 -subj "/C=US/ST=Virginia/L=Radiant/O=labfun/CN=thebiglab" -out SDWAN.pem
 
 % cat sdwan.pem 
 % copy the start and end of that file
@@ -36,7 +33,8 @@ In vManage → Administration → Settings → Controller Certificate Authorizat
 Then go onto vmanager web GUI and install the certificate.
 
 
-On each of the devices once the root-ca is applied create a csr for each as below.  This can be done on the cli of each device by:
+On each of the devices once the root-ca is applied (SDWAN.pem), create a csr for each as below via vManger GUI.  
+This can be done on the cli of each device by:
 
 # vshell
 
@@ -47,39 +45,23 @@ On each of the devices once the root-ca is applied create a csr for each as belo
 % openssl x509 -req -in  vsmart_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
 
 
+Notes FN:
 
-
-
-openssl x509 -req -in  vmanage_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
-
-
-
-
-
-Configure vedge router with routing details to see vmanager
+Configure the vEdge router with routing details and copy the C8K-PAYG file as below:-
 
 copy scp: bootflash:
 
 destination file name = ciscosdwan_cloud_init.cfg
 
 
+Commands to check the sdwan connectivity and tunnel
+
 show sdwan control connections
-
 show sdwan omp peers
-
-
 show sdwan control connections
 show sdwan omp summary
 show sdwan system status
 show sdwan tloc
-
-
-
-
-
-
-
-
 
 
 openssl x509 -req -in  vbond_csr -CA SDWAN.pem -CAkey SDWAN.key -CAcreateserial -out NewCertificate.crt -days 2000 -sha256
