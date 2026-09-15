@@ -6,6 +6,7 @@
 <b>show sdwan system</b> - Shows the vEdge System information including Configuration template, etc.</br>
 <b>show sdwan omp summary</b>
 <b>show sdwan omp peers</b> - shows the valdiltor connected to.</r>
+<b>show sdwan omp tlocs</b></r>
 
 
 
